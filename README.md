@@ -2,7 +2,12 @@
 
 **Universidad Nacional del Centro del Perú · Ingeniería de Sistemas · Desarrollo de Aplicaciones Web · Semana 11 (2026)**
 
-Proyecto académico Django con diseño responsive estilo *tech editorial*, modo oscuro, animaciones CSS y fotografías de productos cargadas desde Unsplash. **No es una tienda de comercio electrónico**: los precios, marcas ficticias, stocks y descripciones son demostrativos.
+Proyecto académico Django con diseño responsive estilo _tech editorial_, modo oscuro, animaciones CSS y fotografías de productos cargadas desde Unsplash. **No es una tienda de comercio electrónico**: los precios, marcas ficticias, stocks y descripciones son demostrativos.
+
+INTEGRANTES:
+
+- Hinojosa Yaranga Renzo Sebastian
+- Valencia Bernaola Andres Anthony
 
 ## Instalación en Windows / VS Code (PowerShell)
 
@@ -18,32 +23,9 @@ python manage.py check
 python manage.py runserver
 ```
 
-Si PowerShell bloquea la activación, usa `.\.venv\Scripts\python.exe` en lugar de `python` en los comandos siguientes, o ejecuta temporalmente `Set-ExecutionPolicy -Scope Process Bypass`.
-
 **Enlaces:** `http://127.0.0.1:8000/` y `http://127.0.0.1:8000/catalogo/`.
 
-**Panel de administración:** ejecuta `python manage.py createsuperuser` y entra en `http://127.0.0.1:8000/admin/`.
-
-## Arquitectura MTV
-
-```text
-Petición HTTP
-   │
-   ▼
-config/urls.py → catalogo/urls.py
-   │
-   ▼
-catalogo/views.py (home FBV / ProductoListView CBV)
-   │                         │
-   ▼                         ▼
-catalogo/models.py ← ORM → SQLite
-   │
-   ▼
-templates/base.html + home.html / catalogo.html
-   │
-   ▼
-Respuesta HTML (CSS + JS + imágenes)
-```
+**Panel de administración:** ejecutar `python manage.py createsuperuser` y entra en `http://127.0.0.1:8000/admin/`.
 
 ## Rutas
 
@@ -55,18 +37,6 @@ Respuesta HTML (CSS + JS + imágenes)
 
 `Producto` contiene nombre, precio (DecimalField), categoría, stock, descripción, URL de imagen, etiqueta, destacado y fecha de creación. Las imágenes se sirven desde URLs públicas de Unsplash; se incluye fallback SVG local. Las fotografías requieren internet. La interfaz también usa Google Fonts y Font Awesome desde CDN; con internet luce completa, y sin internet se usan tipografías del sistema y los íconos externos pueden no aparecer.
 
-## Dos QuerySets y lazy evaluation
-
-```python
-# QuerySet 1: solo disponibles, del más barato al más caro
-Producto.objects.filter(stock__gt=0).order_by('precio')
-
-# QuerySet 2: categoría Audio, búsqueda textual sin distinguir mayúsculas
-Producto.objects.filter(categoria='Audio', nombre__icontains='pro')
-```
-
-Ambas expresiones construyen consultas **lazy**: crear el QuerySet no ejecuta el SELECT. Django consulta la base de datos cuando se itera, evalúa una lista, calcula `len()`, etc. `count()` hace una consulta de recuento específica.
-
 ## Validación
 
 ```powershell
@@ -75,12 +45,13 @@ python manage.py migrate
 python manage.py check
 python manage.py test
 ```
-
 Prueba el inicio, catálogo, categoría, búsqueda y filtrado de disponibilidad. El catálogo utiliza `for`, `empty`, `if`, `url`, `title`, `truncatechars`, `floatformat` y plantillas extendidas de `base.html`.
 
 ## Capturas del entregable
 
 En `docs/capturas/` se encuentra una guía con las capturas que deben realizarse después de ejecutar el proyecto. No se incluyen capturas ficticias.
+
+=======
 
 ## Trabajo grupal
 
@@ -95,12 +66,12 @@ NEOTECH_Catalogo_Django/
 ├── catalogo/ (models.py, views.py, admin.py, urls.py, migrations/, management/, tests.py)
 ├── templates/ (base.html, home.html, catalogo.html, partials/)
 ├── static/ (css/, js/, images/)
-├── docs/capturas/
 ├── manage.py
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
+
 
 ## Créditos y uso
 
@@ -118,3 +89,5 @@ Las imágenes remotas de referencia provienen de [Unsplash](https://unsplash.com
 **Validación del aporte:** `python manage.py check` y `python manage.py test`.
 
 **Nota de Git:** integrar esta contribución en una rama nueva mediante pull request; no reemplazar directamente `main`.
+=======
+
