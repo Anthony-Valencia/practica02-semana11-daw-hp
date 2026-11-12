@@ -78,9 +78,6 @@ python manage.py test
 
 Prueba el inicio, catálogo, categoría, búsqueda y filtrado de disponibilidad. El catálogo utiliza `for`, `empty`, `if`, `url`, `title`, `truncatechars`, `floatformat` y plantillas extendidas de `base.html`.
 
-## Capturas del entregable
-
-En `docs/capturas/` se encuentra una guía con las capturas que deben realizarse después de ejecutar el proyecto. No se incluyen capturas ficticias.
 
 ## Trabajo grupal
 
