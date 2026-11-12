@@ -1,0 +1,20 @@
+{% load static %}
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b14"><meta name="description" content="NEOTECH: explora un catálogo premium de productos tecnológicos.">
+<title>{% block title %}NEOTECH | Future is now{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}"><script src="{% static 'js/main.js' %}" defer></script>
+</head><body>
+<div class="noise" aria-hidden="true"></div><div class="ambient a1" aria-hidden="true"></div><div class="ambient a2" aria-hidden="true"></div>
+<div class="announcement"><span class="live-dot"></span> EXPLORE THE NEXT GENERATION <span class="announce-right">TECNOLOGÍA SIN LÍMITES <i class="fa-solid fa-arrow-right"></i></span></div>
+<header class="site-header"><div class="container nav-inner">
+<a class="brand" href="{% url 'home' %}" aria-label="Inicio NEOTECH"><span class="brand-symbol"><i class="fa-solid fa-bolt"></i></span>NEO<span>TECH</span><span class="brand-dot">.</span></a>
+<nav class="main-nav" id="mainNav"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Inicio</a><a class="nav-link {% if '/catalogo/' in request.path %}active{% endif %}" href="{% url 'catalogo' %}">Explorar catálogo</a><a class="nav-link" href="{% url 'catalogo' %}?categoria=Gaming">Gaming</a><a class="nav-link" href="{% url 'catalogo' %}?categoria=Audio">Audio</a></nav>
+<div class="nav-actions"><a class="nav-search" href="{% url 'catalogo' %}" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a><span class="edition">EDITION / 2026</span><button class="menu-btn" id="menuButton" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button></div>
+</div></header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="footer"><div class="container footer-top"><div><a class="brand" href="{% url 'home' %}"><span class="brand-symbol"><i class="fa-solid fa-bolt"></i></span>NEO<span>TECH</span><span class="brand-dot">.</span></a><p>Curated tech for a better tomorrow.<br>Diseño, innovación y tecnología.</p></div><div class="footer-right"><div><span>EXPLORAR</span><a href="{% url 'home' %}">Inicio</a><a href="{% url 'catalogo' %}">Productos</a></div><div><span>PROYECTO</span><a href="/admin/">Administración</a><a href="{% url 'catalogo' %}">Colección 2026</a></div></div></div><div class="container footer-bottom"><span>© 2026 NEOTECH. Proyecto académico Django MTV.</span><span>DESIGNED FOR THE FUTURE <i class="fa-solid fa-arrow-up-right-from-square"></i></span></div></footer>
+</body></html>
