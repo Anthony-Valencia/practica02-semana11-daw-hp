@@ -78,6 +78,9 @@ python manage.py test
 
 Prueba el inicio, catálogo, categoría, búsqueda y filtrado de disponibilidad. El catálogo utiliza `for`, `empty`, `if`, `url`, `title`, `truncatechars`, `floatformat` y plantillas extendidas de `base.html`.
 
+## Capturas del entregable
+
+En `docs/capturas/` se encuentra una guía con las capturas que deben realizarse después de ejecutar el proyecto. No se incluyen capturas ficticias.
 
 ## Trabajo grupal
 
@@ -102,3 +105,16 @@ NEOTECH_Catalogo_Django/
 ## Créditos y uso
 
 Las imágenes remotas de referencia provienen de [Unsplash](https://unsplash.com/) y deben usarse conforme a sus condiciones. Íconos de Font Awesome Free y fuentes de Google Fonts, accesibles desde sus CDN públicos. Proyecto destinado a demostración local; para producción hay que configurar `DEBUG=0`, una clave secreta propia, hosts y static files.
+
+
+## Aporte colaborativo — fichas de detalle y favoritos
+
+- Nueva ruta `catalogo/<int:pk>/` implementada con `DetailView`, donde se consulta el producto por clave primaria.
+- Ficha completa con foto, descripción, precio, disponibilidad y productos relacionados mediante un QuerySet por categoría.
+- Botones accesibles de favoritos en las tarjetas y fichas. Persisten en `localStorage` del navegador, sin cuentas ni base de datos adicional. El indicador del encabezado muestra el número de favoritos.
+- Pruebas para detalle existente, error 404 y productos relacionados.
+- Los precios son demostrativos y el sitio no procesa compras.
+
+**Validación del aporte:** `python manage.py check` y `python manage.py test`.
+
+**Nota de Git:** integrar esta contribución en una rama nueva mediante pull request; no reemplazar directamente `main`.

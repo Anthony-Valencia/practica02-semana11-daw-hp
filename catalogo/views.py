@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import Producto
 
@@ -31,4 +31,20 @@ class ProductoListView(ListView):
         context['orden_actual']=self.request.GET.get('orden','recientes')
         context['disponibilidad_actual']=self.request.GET.get('disponibilidad','')
         context['total']=self.get_queryset().count()
+        return context
+
+
+class ProductoDetailView(DetailView):
+    """Ficha informativa de un producto almacenado con el ORM."""
+    model = Producto
+    template_name = 'producto_detalle.html'
+    context_object_name = 'producto'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['relacionados'] = (
+            Producto.objects.filter(categoria=self.object.categoria)
+            .exclude(pk=self.object.pk)
+            .order_by('-creado_en')[:4]
+        )
         return context

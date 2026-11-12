@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ producto.nombre }} | NEOTECH{% endblock %}
+{% block content %}
+<section class="container detail-page">
+  <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="{% url 'home' %}">INICIO</a><span>/</span><a href="{% url 'catalogo' %}">CATÁLOGO</a><span>/</span><span>{{ producto.nombre|upper }}</span></nav>
+  <div class="detail-layout">
+    <div class="detail-visual reveal">
+      <span class="detail-code">NEOTECH / PRODUCT—{{ producto.pk|stringformat:'03d' }}</span>
+      <img src="{{ producto.imagen_url|default:'' }}" alt="Fotografía del producto {{ producto.nombre }}" onerror="this.onerror=null;this.src='{% static 'images/product.svg' %}'">
+      <span class="detail-orbit" aria-hidden="true"></span>
+    </div>
+    <div class="detail-information reveal">
+      <span class="section-kicker"><span class="accent-square"></span> {{ producto.categoria|upper }} / TECH COLLECTION</span>
+      <h1>{{ producto.nombre }}</h1>
+      {% if producto.etiqueta %}<span class="detail-tag">{{ producto.etiqueta|upper }}</span>{% endif %}
+      <p class="detail-description">{{ producto.descripcion|default:'Tecnología seleccionada para nuestra colección NEOTECH.' }}</p>
+      <div class="detail-price"><span>PRECIO REFERENCIAL</span><strong>S/ {{ producto.precio|floatformat:2 }}</strong></div>
+      {% if producto.stock > 0 %}<p class="detail-stock available"><i class="fa-solid fa-circle-check"></i> DISPONIBLE · {{ producto.stock }} UNIDADES</p>{% else %}<p class="detail-stock unavailable"><i class="fa-solid fa-circle-xmark"></i> PRODUCTO AGOTADO</p>{% endif %}
+      <div class="detail-actions"><button type="button" class="btn btn-primary favorite-btn favorite-detail" data-favorite-id="{{ producto.pk }}" aria-pressed="false"><i class="fa-regular fa-heart" aria-hidden="true"></i> GUARDAR EN FAVORITOS</button><a class="btn btn-text" href="{% url 'catalogo' %}">VOLVER AL CATÁLOGO <i class="fa-solid fa-arrow-right"></i></a></div>
+      <p class="detail-disclaimer">Catálogo académico: no se realizan compras ni pagos en esta web.</p>
+    </div>
+  </div>
+</section>
+{% if relacionados %}<section class="container detail-related"><div class="section-header"><div><div class="section-kicker">MÁS PARA EXPLORAR</div><h2>PRODUCTOS <em>SIMILARES.</em></h2></div><a href="{% url 'catalogo' %}?categoria={{ producto.categoria|urlencode }}" class="subtle-link">VER CATEGORÍA <i class="fa-solid fa-arrow-right"></i></a></div><div class="products-grid">{% for producto in relacionados %}{% include 'partials/product_card.html' %}{% endfor %}</div></section>{% endif %}
+{% endblock %}
